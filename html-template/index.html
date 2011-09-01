@@ -113,9 +113,8 @@
             float: right;
         }
 
-        .gap {
-            display: block;
-            height: 40px;
+        #motto {
+
         }
 
         footer {
@@ -126,11 +125,11 @@
             padding-top: 4px;
             bottom: 0;
             width: 940px;
+            position: fixed;
         }
 
         #share-bar {
             height: 50px;
-            border-bottom: solid thin #888888;
             width: 800px;
             margin: auto;
         }
@@ -146,7 +145,10 @@
         }
 
         #motto {
-            color: #ccc;
+            padding-top: 30px;
+            display: block;
+            height: 100px;
+            color: #666;
             font-family: 'Open Sans', sans-serif;
             margin: auto;
             margin-top: 15px;
@@ -332,11 +334,12 @@
                 </div>
             </div>
         </div>
-        <div class="gap">
-
-        </div>
     </section>
 
+    <div id="motto">
+        doublespeak aims to uncover lies, distortions and twisted sentences which go unnoticed in the torrent of
+        daily news.
+    </div>
     <footer>
         <div id="share-bar">
             <h4>Spread the word</h4>
@@ -369,11 +372,17 @@
                 </script>
             </div>
         </div>
-        <div id="motto">
-            DOUBLESPEAK aims to uncover lies, distortions and twisted sentences which go unnoticed in the torrent of
-            daily news.
-        </div>
+        
     </footer>
 </div>
 </body>
+    <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript">
+        function initiliazeWindowScroll() {
+            
+        }
+        $(document).ready(function() {
+            initiliazeWindowScroll();
+        });
+    </script>
 </html>
