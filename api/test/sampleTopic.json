@@ -1,0 +1,13 @@
+{
+    "title": "tit",
+    "author": "author",
+    "speaker": "speaker",
+    "links": [
+        {
+            "url": "http://www.yahoo.com"
+        },
+        {
+            "url": "http://www.doublespeak.com"
+        }
+    ]
+}

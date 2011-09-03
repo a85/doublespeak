@@ -11,7 +11,9 @@ from tornado import wsgi, web
 
 class TopicsHandler(web.RequestHandler):
     def get(self):
-        self.write('GET')
+        topics = Models.Topic.all()
+        for topic in topics:
+            topicDict = topic.marshal()
 
     def post(self):
         if(self.request.body):
