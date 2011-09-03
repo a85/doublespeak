@@ -8,8 +8,39 @@ class DictModel(db.Model):
         for key, val in vals.items():
             setattr(self, key, val)
 
+class Topic(DictModel):
+    title = db.StringProperty()
+    speaker = db.StringProperty()
+    author = db.StringProperty()
 
-class Link(db.Model):
+    def __init__(self):
+        DictModel.__init__(self)
+        self.links = []
+
+    def unmarshal(self, jsonDict):
+        linksDict = jsonDict['links']
+        for linkDict in linksDict:
+            link = Link()
+            link.unmarshal(linkDict)
+            self.links.append(link)
+        del jsonDict['links']
+        self.dict_to_obj(jsonDict)
+
+    def marshal(self):
+        return self.obj_to_dict()
+
+    def addLink(self, link):
+        return
+    
+    def persist(self):
+        #persist topic
+        self.put()
+        #persist links
+        for link in self.links:
+            link.persist()
+
+
+class Link(DictModel):
     title = db.StringProperty()
     description = db.StringProperty()
     url = db.LinkProperty()
@@ -19,28 +50,11 @@ class Link(db.Model):
     provider_url = db.LinkProperty()
     thumbnail_url = db.LinkProperty()
 
+    def persist(self):
+        self.put()
 
-class Topic(DictModel):
-    title = db.StringProperty()
-    speaker = db.StringProperty()
-    author = db.StringProperty()
-
-    def __init__(self, jsonDict):
-        DictModel.__init__(self)
+    def unmarshal(self, jsonDict):
         self.dict_to_obj(jsonDict)
 
-
-class MapTopicLink(db.Model):
-    topic = db.IntegerProperty
-    link = db.IntegerProperty
-
-
-class CompositeTopic():
-    def __init__(self, topicDB):
-        self.compositeTopic = topicDB.to_dict
-
-    def fillLinks(self, linksDB):
-        links = []
-        for linkDB in linksDB:
-            links.append(linkDB.to_dict())
-        self.compositeTopic['links'] = links
+    def marshal(self):
+        return self.obj_to_dict()
