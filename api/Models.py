@@ -10,14 +10,22 @@ class DictModel(db.Model):
             setattr(self, key, val)
 
 
-class Topic(DictModel):
+class Topic(db.Model):
     title = db.StringProperty()
     speaker = db.StringProperty()
     author = db.StringProperty()
+    links = []
 
-    def __init__(self, **kwds):
+    def obj_to_dict(self):
+        return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
+
+    def dict_to_obj(self, vals):
+        for key, val in vals.items():
+            setattr(self, key, val)
+
+    """def __init__(self, **kwds):
         DictModel.__init__(self)
-        self.links = []
+        self.links = []"""
 
     def add_link(self, linkDict):
         linkFromDB = Link.gql("WHERE url = :url", url=linkDict['url']).get()
@@ -38,12 +46,13 @@ class Topic(DictModel):
 
     def marshal(self):
         topicDict = self.obj_to_dict()
-        topicDict.links = []
+        topicDict['links'] = []
         topicLinks = TopicLink.all()
-        topicLinks.filter('topic', self.key().id())
+        topicLinks.filter('topicId', self.key().id())
         for topicLink in topicLinks:
-            link = Link.gql("WHERE id=:linkId", linkId=topicLink).get()
-            topicDict.links.append(link.marshal())
+            link = Link.get_by_id(topicLink.linkId)
+            if link:
+                topicDict['links'].append(link.marshal())
         return topicDict
 
     def persist(self):
@@ -55,7 +64,7 @@ class Topic(DictModel):
                 linkId = link.key().id()
             else:
                 linkId = link.persist().id()
-            #persist relationship between topic and link
+                #persist relationship between topic and link
             if not TopicLink.gql("WHERE topicId=:topicId AND linkId=:linkId", topicId=topicId,
                                  linkId=linkId).get():
                 topicLink = TopicLink()
@@ -64,16 +73,24 @@ class Topic(DictModel):
                 topicLink.put()
 
 
-class Link(DictModel):
+class Link(db.Model):
     url = db.LinkProperty()
     title = db.StringProperty()
     description = db.StringProperty()
     provider_name = db.StringProperty()
     thumbnail_url = db.LinkProperty()
+    fetch = True
 
-    def __init__(self, **kwds):
+    def obj_to_dict(self):
+        return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
+
+    def dict_to_obj(self, vals):
+        for key, val in vals.items():
+            setattr(self, key, val)
+
+    """def __init__(self, **kwds):
         DictModel.__init__(self)
-        self.fetch = True
+        self.fetch = True"""
 
     def persist(self):
         return self.put()
