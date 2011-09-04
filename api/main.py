@@ -9,6 +9,12 @@ import Models
 import fix_path
 from tornado import wsgi, web
 
+def error(msg):
+    err = dict()
+    err['message'] = msg
+    return err
+
+
 class TopicsHandler(web.RequestHandler):
     def get(self):
         topics = Models.Topic.all()
@@ -16,10 +22,56 @@ class TopicsHandler(web.RequestHandler):
             topicDict = topic.marshal()
 
     def post(self):
-        if(self.request.body):
+        if self.request.body:
             topic = Models.Topic()
             topic.unmarshal(simplejson.loads(self.request.body))
             topic.persist()
+
+
+class TopicHandler(web.RequestHandler):
+    def get(self, topic_id):
+        topic = Models.Topic.get_by_id(int(topic_id))
+        if topic:
+            self.write(simplejson.dumps(topic.marshal()))
+        else:
+            self.write(error('Topic not found.'))
+
+    def put(self, topic_id):
+        if self.request.body:
+            topic = Models.Topic.get_by_id(int(topic_id))
+            topic.unmarshal(simplejson.loads(self.request.body))
+            topic.persist()
+
+
+class TopicLinksHandler(web.RequestHandler):
+    def get(self, topic_id):
+        topic = Models.Topic.get_by_id(int(topic_id))
+        if topic:
+            topicDict = topic.marshal()
+            self.write(simplejson.dumps(topicDict['links']))
+        else:
+            self.write(error('Topic not found.'))
+
+    def post(self, topic_id):
+        if self.request.body:
+            topic = Models.Topic.get_by_id(int(topic_id))
+            topic.add_link(simplejson.loads(self.request.body))
+            topic.persist()
+
+
+class TopicLinkHandler(web.RequestHandler):
+    def get(self, topic_id, link_id):
+        link = Models.Link.get_by_id(int(link_id))
+        if link:
+            self.write(simplejson.dumps(link.marshal()))
+        else:
+            self.write(error('Link not found.'))
+
+    def put(self, topic_id, link_id): #vote up/down information will be stored in the TopicLink table.
+        if self.request.body:
+            link = Models.Link.get_by_id(int(link_id))
+            link.unmarshal(simplejson.loads(self.request.body))
+            link.persist()
 
 settings = {
     "page_title": u"doubleSpeak",
@@ -30,9 +82,9 @@ settings = {
 
 handlers = [
     (r"/topics", TopicsHandler),
-    #(r"/topics/(\d+)", TopicHandler),
-    #(r"/topics/(\d+)/links", TopicLinksHandler),
-    #(r"/topics/(\d+)/links/(\d+)", TopicLinkHandler),
+    (r"/topics/(\d+)", TopicHandler),
+    (r"/topics/(\d+)/links", TopicLinksHandler),
+    (r"/topics/(\d+)/links/(\d+)", TopicLinkHandler),
 ]
 
 def main():

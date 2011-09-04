@@ -19,21 +19,31 @@ class Topic(DictModel):
         DictModel.__init__(self)
         self.links = []
 
+    def add_link(self, linkDict):
+        linkFromDB = Link.gql("WHERE url = :url", url=linkDict['url']).get()
+        if not linkFromDB:
+            link = Link()
+        else:
+            link = linkFromDB
+        link.unmarshal(linkDict)
+        self.links.append(link)
+
+
     def unmarshal(self, jsonDict):
         linksDict = jsonDict['links']
         for linkDict in linksDict:
-            linkFromDB = Link.gql("WHERE url = :url", url=linkDict['url']).get()
-            if not linkFromDB:
-                link = Link()
-            else:
-                link = linkFromDB
-            link.unmarshal(linkDict)
-            self.links.append(link)
+            self.add_link(linkDict)
         del jsonDict['links']
         self.dict_to_obj(jsonDict)
 
     def marshal(self):
         topicDict = self.obj_to_dict()
+        topicDict.links = []
+        topicLinks = TopicLink.all()
+        topicLinks.filter('topic', self.key().id())
+        for topicLink in topicLinks:
+            link = Link.gql("WHERE id=:linkId", linkId=topicLink).get()
+            topicDict.links.append(link.marshal())
         return topicDict
 
     def persist(self):
