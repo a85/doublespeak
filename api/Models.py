@@ -46,25 +46,25 @@ class Topic(db.Model):
 
     def marshal(self):
         topicDict = self.obj_to_dict()
-        topicDict['links'] = []
+        topicDict['links'] = dict()
         topicLinks = TopicLink.all()
         topicLinks.filter('topicId', self.key().id())
         for topicLink in topicLinks:
             link = Link.get_by_id(topicLink.linkId)
             if link:
-                topicDict['links'].append(link.marshal())
+                topicDict['links'][link.key().id()] = link.marshal()
         return topicDict
 
     def persist(self):
         #persist topic
-        topicId = self.put()
+        topicId = self.put().id()
         for link in self.links:
             #persist links
-            if link.fetch:
+            if not link.fetch:
                 linkId = link.key().id()
             else:
                 linkId = link.persist().id()
-                #persist relationship between topic and link
+            #persist relationship between topic and link
             if not TopicLink.gql("WHERE topicId=:topicId AND linkId=:linkId", topicId=topicId,
                                  linkId=linkId).get():
                 topicLink = TopicLink()

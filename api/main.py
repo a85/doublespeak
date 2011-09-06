@@ -18,8 +18,12 @@ def error(msg):
 class TopicsHandler(web.RequestHandler):
     def get(self):
         topics = Models.Topic.all()
+        topicsDict = dict()
         for topic in topics:
             topicDict = topic.marshal()
+            if topicDict:
+                topicsDict[topic.key().id()] = topicDict
+        self.write(simplejson.dumps(topicsDict))
 
     def post(self):
         if self.request.body:
