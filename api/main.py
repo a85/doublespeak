@@ -18,11 +18,11 @@ def error(msg):
 class TopicsHandler(web.RequestHandler):
     def get(self):
         topics = Models.Topic.all()
-        topicsDict = dict()
+        topicsDict = []
         for topic in topics:
             topicDict = topic.marshal()
             if topicDict:
-                topicsDict[topic.key().id()] = topicDict
+                topicsDict.append(topicDict)
         self.write(simplejson.dumps(topicsDict))
 
     def post(self):
@@ -59,7 +59,10 @@ class TopicLinksHandler(web.RequestHandler):
     def post(self, topic_id):
         if self.request.body:
             topic = Models.Topic.get_by_id(int(topic_id))
-            topic.add_link(simplejson.loads(self.request.body))
+            topicDict = dict()
+            topicDict['links'] = []
+            topicDict['links'].append(simplejson.loads(self.request.body))
+            topic.unmarshal(topicDict)
             topic.persist()
 
 

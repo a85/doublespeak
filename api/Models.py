@@ -33,9 +33,9 @@ class Topic(db.Model):
             link = Link()
         else:
             link = linkFromDB
+            link.fetch = False
         link.unmarshal(linkDict)
         self.links.append(link)
-
 
     def unmarshal(self, jsonDict):
         linksDict = jsonDict['links']
@@ -46,13 +46,14 @@ class Topic(db.Model):
 
     def marshal(self):
         topicDict = self.obj_to_dict()
-        topicDict['links'] = dict()
+        topicDict['links'] = []
+        topicDict['id'] = self.key().id()
         topicLinks = TopicLink.all()
         topicLinks.filter('topicId', self.key().id())
         for topicLink in topicLinks:
             link = Link.get_by_id(topicLink.linkId)
             if link:
-                topicDict['links'][link.key().id()] = link.marshal()
+                topicDict['links'].append(link.marshal())
         return topicDict
 
     def persist(self):
@@ -105,7 +106,9 @@ class Link(db.Model):
             self.thumbnail_url = embedlyLink.thumbnail_url
 
     def marshal(self):
-        return self.obj_to_dict()
+        linkDict = self.obj_to_dict()
+        linkDict['id'] = self.key().id()
+        return linkDict
 
     def fetchFromEmbedly(self, url):
         client = Embedly('2ed57c50cffa11e0bc4a4040d3dc5c07')
