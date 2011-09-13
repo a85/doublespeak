@@ -7,7 +7,7 @@ The embedly object that interacts with the service
 import re
 import urllib
 import httplib2
-import json
+from django.utils import simplejson as json
 
 from models import Url
 
