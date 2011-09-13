@@ -1,0 +1,165 @@
+#topbar {
+    background-color: #333;
+    width: 100%;
+    height: 10px;
+}
+
+header {
+    width: 343px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#topic {
+    margin-top: 20px;
+    border-top: solid thin #DDDDDD;
+    border-bottom: solid thin #DDDDDD;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+#topic-detail {
+    padding-top: 30px;
+    border-bottom: solid thin #DDDDDD;
+    padding-bottom: 25px;
+}
+
+#topic-detail .description {
+    font-family: Georgia, sans-serif;
+}
+
+#topic-detail .publisher a {
+    color: #b43030;
+    font-family: 'Open Sans', serif;
+}
+
+#topic-detail .date {
+    font-family: 'Open Sans', serif;
+}
+
+h1 {
+    color: #333;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: Georgia, serif;
+    font-size: 1.5em;
+    color: #999;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+#why {
+    margin: auto;
+    width: 180px;
+    margin-top: 15px;
+}
+
+#down-arrow {
+    position: absolute;
+    width: 40px;
+    margin: auto;
+    margin-top: 19px;
+    margin-left: 447px;
+}
+
+#links {
+    margin-top: 20px;
+    margin-left: 45px;
+}
+
+.link {
+    border-bottom: solid thin #efefef;
+    padding-bottom: 20px;
+}
+
+.link h4 {
+    font-family: 'Open Sans', serif;
+}
+
+.link h4 a {
+    color: #b43030;
+}
+
+.link p {
+    font-family: Georgia, serif;
+    font-size: 0.9em;
+}
+
+.link .publisher {
+    float: left;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.link .publisher a {
+    color: #b43030;
+}
+
+.link .date {
+    font-family: 'Open Sans', sans-serif;
+    float: right;
+}
+
+#motto {
+
+}
+
+footer {
+    background-image: url(../img/black_linen_v2.png);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #333;
+    padding-top: 4px;
+    bottom: 0;
+    width: 940px;
+    position: fixed;
+}
+
+#share-bar {
+    height: 50px;
+    width: 800px;
+    margin: auto;
+}
+
+#share-bar h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: white;
+    float: left;
+}
+
+#motto {
+    padding-top: 30px;
+    display: block;
+    height: 100px;
+    color: #666;
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
+    margin-top: 15px;
+    padding-bottom: 20px;
+    width: 703px;
+}
+
+#fb-button {
+    float: left;
+    margin-top: 17px;
+    margin-left: 20px;
+}
+
+#tweet-button {
+    float: left;
+    margin-top: 17px;
+    margin-left: -40px;
+}
+
+#gplus1-button {
+    float: left;
+    margin-top: 17px;
+}

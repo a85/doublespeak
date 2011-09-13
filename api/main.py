@@ -7,7 +7,7 @@ import os
 import Models
 
 import fix_path
-from tornado import wsgi, web
+from tornado import wsgi, web, template
 
 def error(msg):
     err = dict()
@@ -80,14 +80,26 @@ class TopicLinkHandler(web.RequestHandler):
             link.unmarshal(simplejson.loads(self.request.body))
             link.persist()
 
+class FrontMainHandler(web.RequestHandler):
+    def get(self):
+        self.write("Hello world!")
+
+class FrontTopicHandler(web.RequestHandler):
+    def get(self, topic_id):
+        items = ["Item 1", "Item 2", "Item 3"]
+        self.render("template.html", title="My title", items=items)
+    
 settings = {
     "page_title": u"doubleSpeak",
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
     "sourcecode_stylesheet": "default",
     "xsrf_cookies": False,
     }
 
 handlers = [
+    (r"/", FrontMainHandler),
+    (r"/topics/(\d+)", FrontTopicHandler),
     (r"/api/topics", TopicsHandler),
     (r"/api/topics/(\d+)", TopicHandler),
     (r"/api/topics/(\d+)/links", TopicLinksHandler),
