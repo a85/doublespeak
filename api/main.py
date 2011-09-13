@@ -88,10 +88,10 @@ settings = {
     }
 
 handlers = [
-    (r"/topics", TopicsHandler),
-    (r"/topics/(\d+)", TopicHandler),
-    (r"/topics/(\d+)/links", TopicLinksHandler),
-    (r"/topics/(\d+)/links/(\d+)", TopicLinkHandler),
+    (r"/api/topics", TopicsHandler),
+    (r"/api/topics/(\d+)", TopicHandler),
+    (r"/api/topics/(\d+)/links", TopicLinksHandler),
+    (r"/api/topics/(\d+)/links/(\d+)", TopicLinkHandler),
 ]
 
 def main():

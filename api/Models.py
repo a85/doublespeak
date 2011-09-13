@@ -101,7 +101,7 @@ class Link(db.Model):
         if self.fetch:
             embedlyLink = self.fetchFromEmbedly(self.url)
             self.title = embedlyLink.title
-            self.description = embedlyLink.description
+            self.description = embedlyLink.description[:499]
             self.provider_name = embedlyLink.provider_name
             self.thumbnail_url = embedlyLink.thumbnail_url
 
