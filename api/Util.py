@@ -1,5 +1,5 @@
 import keyStore
-from NewModel import Link
+from Models import Link
 from lib.embedly.client import Embedly
 from google.appengine.ext import db
 
