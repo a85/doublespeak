@@ -1,8 +1,14 @@
-{"title": "social", "speaker": "zuck", "links": [
-    {
-        "url": "http:\/\/www.facebook.com"
-    },
-    {
-        "url": "http:\/\/www.twitter.com"
-    }
-], "author": "author"}
+{
+    "title": "social",
+    "speaker": "zuck",
+    "links": [
+        {
+            "url": "http:\/\/www.facebook.com"
+        },
+        {
+            "url": "http:\/\/www.twitter.com"
+        }
+    ],
+    "author": "author",
+    "topic_link": "http://www.yahoo.com"
+}

@@ -1,8 +1,8 @@
 import unittest
 from google.appengine.ext import testbed
+from google.appengine.ext import db
 
-
-class DemoTestCase(unittest.TestCase):
+class TestDao(unittest.TestCase):
     def setUp(self):
         # First, create an instance of the Testbed class.
         self.testbed = testbed.Testbed()
@@ -10,10 +10,9 @@ class DemoTestCase(unittest.TestCase):
         self.testbed.activate()
         # Next, declare which service stubs you want to use.
         self.testbed.init_datastore_v3_stub()
-        self.testbed.init_memcache_stub()
 
     def tearDown(self):
         self.testbed.deactivate()
 
-    def testInsertEntity(self):
-        self.assertEqual(1, 0)
+    def testOneZero(self):
+        self.assertEqual(1, 1)
