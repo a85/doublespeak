@@ -57,7 +57,7 @@ class TopicHandler(web.RequestHandler):
             self.write(simplejson.dumps(topicDict))
         else:
             self.set_status(404)
-            self.write(simplejson.dumps(error('Topic not found.')))
+            self.write(error('Topic not found.'))
 
         self.set_header("Content-Type", "application/json")
 
@@ -119,7 +119,7 @@ class TopicLinkHandler(web.RequestHandler):
             self.write(simplejson.dumps(linkDict))
         else:
             self.set_status(404)
-            self.write(simplejson.dumps(error('Link not found.')))
+            self.write(error('Link not found.'))
         self.set_header("Content-Type", "application/json")
 
 
