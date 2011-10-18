@@ -29,13 +29,13 @@
     <section id="topic-detail">
         <div class="row">
             <div class="description span10 offset3 columns">
-                Link description needed
+                {{ topic['topic_link']['description'] }}
             </div>
         </div>
         <div class="row">
             <div class="publisher span7 offset3 columns">
-                <a href="http:/www.timesofindia.com" target="_blank">
-                    Link provider needed
+                <a href="{{ topic['topic_link']['url'] }}" target="_blank">
+                    {{ topic['topic_link']['provider_name'] }}
                 </a>
             </div>
             <div class="date span2 offset1 columns">

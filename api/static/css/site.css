@@ -68,17 +68,19 @@ h2 {
 }
 
 #links {
-    margin-top: 20px;
     margin-left: 45px;
 }
 
 .link {
+    margin-top: 20px;
     border-bottom: solid thin #efefef;
     padding-bottom: 20px;
 }
 
 .link h4 {
     font-family: 'Open Sans', serif;
+    line-height: 20px;
+    margin-bottom: 10px;
 }
 
 .link h4 a {
