@@ -10,7 +10,7 @@ import Util
 from Exceptions import TopicNotFoundException
 
 import fix_path, keyStore
-from tornado import wsgi, web
+from tornado import wsgi, web, template
 from lib import oauth
 
 def error(msg):
@@ -18,7 +18,12 @@ def error(msg):
     err['message'] = msg
     return simplejson.dumps(err)
 
-
+class FrontTopicHandler(web.RequestHandler):
+    def get(self, topic_id):
+        topic = DaoImpl.getTopic(topic_id)
+        topicDict = Util.topicToDict(topic)
+        self.render("template.html", topic=topicDict)
+        
 class TopicsHandler(web.RequestHandler):
     def get(self): #done
         topics = DaoImpl.getTopics()
