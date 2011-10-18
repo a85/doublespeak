@@ -169,13 +169,15 @@ class CallbackHandler(web.RequestHandler):
 
 settings = {
     "page_title": u"doubleSpeak",
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "template_path": os.path.join(os.path.dirname(__file__), "templates"),
     "sourcecode_stylesheet": "default",
     "xsrf_cookies": False,
     }
 
 handlers = [
-    (r"/api/topics", TopicsHandler),
+    (r"/topics/(\d+)", FrontTopicHandler),
+    (r"/api/topics/?", TopicsHandler),
     (r"/api/topics/(\d+)", TopicHandler),
     (r"/api/topics/(\d+)/links", TopicLinksHandler),
     (r"/api/topics/(\d+)/links/(\d+)", TopicLinkHandler),
