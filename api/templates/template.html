@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="date span2 offset1 columns">
-                Link date needed
+                {{ topic['topic_link']['created'] }}
             </div>
         </div>
     </section>
@@ -62,7 +62,7 @@
                     <a href="{{ link['url'] }}">{{ link['provider_name'] }}</a>
                 </div>
                 <div class="date">
-                    Needed
+                    {{ link['created'] }}
                 </div>
             </div>
         {% end %}

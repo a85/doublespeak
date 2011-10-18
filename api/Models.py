@@ -6,6 +6,7 @@ class Link(db.Model):
     description = db.StringProperty()
     provider_name = db.StringProperty()
     thumbnail_url = db.LinkProperty()
+    created = db.DateProperty()
 
     def __str__(self):
         return self.url
@@ -16,6 +17,7 @@ class Topic(db.Model):
     author = db.StringProperty()
     topic_link = db.ReferenceProperty(Link, collection_name='topic')
     parentTopic = db.SelfReferenceProperty()
+    created = db.DateProperty()
 
     def __str__(self):
         return self.title

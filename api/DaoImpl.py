@@ -1,4 +1,5 @@
 import logging
+import datetime
 from google.appengine.api.datastore_errors import TransactionFailedError
 from google.appengine.ext.db import NotSavedError
 from Models import *
@@ -35,6 +36,7 @@ def createLinkFromDict(linkDict, parent=None):
 
 def createLinkFromObj(link):
     """Create link entry in the datastore"""
+    link.created = datetime.date.today()
     try:
         link.put()
     except TransactionFailedError, e:
@@ -126,6 +128,7 @@ def __create_topic_txn(topicDict):
     topic.put()
     topic_link = createLinkFromUrl(topicDict['topic_link'], topic)
     topic.topic_link = topic_link
+    topic.created = datetime.date.today()
     topic.put()
     for linkDict in linksDict:
         link = createLinkFromDict(linkDict, topic)
