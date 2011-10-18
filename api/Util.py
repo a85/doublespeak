@@ -23,7 +23,7 @@ def obj_to_dict(obj):
     for p in obj.properties():
         element = getattr(obj, p)
         if isinstance(element, db.Model):
-            objDict[p] = unicode(element.key().id())
+            objDict[p] = obj_to_dict(element)
         else:
             objDict[p] = unicode(element)
         #return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
