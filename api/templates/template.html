@@ -2,7 +2,7 @@
 <html xmlns:og="http://ogp.me/ns#"
       xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-    <title>doublespeak</title>
+    <title>doublespeak | {{ topic['title'] }}</title>
     <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.1.min.css">
     <link rel="stylesheet" href="{{ static_url("css/site.css") }}">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic-ext' rel='stylesheet'
@@ -17,9 +17,9 @@
     </header>
 
     <section id="topic">
-        <h1>"I support Anna Hazare"</h1>
+        <h1>{{ topic['title'] }}</h1>
 
-        <h2>Mayawati</h2>
+        <h2>{{ topic['speaker'] }}</h2>
 
         <div id="down-arrow">
             <img src="{{ static_url("img/down_arrow.png") }}"/>
@@ -29,19 +29,17 @@
     <section id="topic-detail">
         <div class="row">
             <div class="description span10 offset3 columns">
-                Uttar Pradesh chief minister and BSP supremo Mayawati finally broke her silence on Wednesday and
-                announced
-                her party's support to Anna Hazare's fight against corruption.
+                Link description needed
             </div>
         </div>
         <div class="row">
             <div class="publisher span7 offset3 columns">
                 <a href="http:/www.timesofindia.com" target="_blank">
-                    The Times of India
+                    Link provider needed
                 </a>
             </div>
             <div class="date span2 offset1 columns">
-                August 28, 2011
+                Link date needed
             </div>
         </div>
     </section>
@@ -50,122 +48,24 @@
 
     <section id="links">
         <div class="row">
+        {% for link in topic['links'] %}
             <div class="link span6 offset1 columns">
                 <h4>
-                    <a href="#">NDA, UPA playing power game</a>
+                    <a href="{{ link['url'] }}">{{ link['title'] }}</a>
                 </h4>
 
                 <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
+                    {{ link['description'] }}
                 </p>
 
                 <div class="publisher">
-                    <a href="#">Hindustan Times</a>
+                    <a href="{{ link['url'] }}">{{ link['provider_name'] }}</a>
                 </div>
                 <div class="date">
-                    August 29th, 2010
+                    Needed
                 </div>
             </div>
-
-            <div class="link span6 offset1 columns">
-                <h4>
-                    <a href="#">NDA, UPA playing power game</a>
-                </h4>
-
-                <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
-                </p>
-
-                <div class="publisher">
-                    <a href="#">Hindustan Times</a>
-                </div>
-                <div class="date">
-                    August 29th, 2010
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="link span6 offset1 columns">
-                <h4>
-                    <a href="#">NDA, UPA playing power game</a>
-                </h4>
-
-                <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
-                </p>
-
-                <div class="publisher">
-                    <a href="#">Hindustan Times</a>
-                </div>
-                <div class="date">
-                    August 29th, 2010
-                </div>
-            </div>
-
-            <div class="link span6 offset1 columns">
-                <h4>
-                    <a href="#">NDA, UPA playing power game</a>
-                </h4>
-
-                <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
-                </p>
-
-                <div class="publisher">
-                    <a href="#">Hindustan Times</a>
-                </div>
-                <div class="date">
-                    August 29th, 2010
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="link span6 offset1 columns">
-                <h4>
-                    <a href="#">NDA, UPA playing power game</a>
-                </h4>
-
-                <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
-                </p>
-
-                <div class="publisher">
-                    <a href="#">Hindustan Times</a>
-                </div>
-                <div class="date">
-                    August 29th, 2010
-                </div>
-            </div>
-
-            <div class="link span6 offset1 columns">
-                <h4>
-                    <a href="#">NDA, UPA playing power game</a>
-                </h4>
-
-                <p>
-                    She has also extended a word of advice for the Congress, a challenge for 'Team Anna' and a warning
-                    for Anna supporters. At a press conference held on Friday evening, she advised the Congress party to
-                    make sure that the final shape of the Lokpal Bill is in sync with the Constitution of India.
-                </p>
-
-                <div class="publisher">
-                    <a href="#">Hindustan Times</a>
-                </div>
-                <div class="date">
-                    August 29th, 2010
-                </div>
-            </div>
+        {% end %}
         </div>
     </section>
 
